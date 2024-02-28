@@ -3,6 +3,8 @@ package org.example.eco.product.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.eco.product.category.entity.Category;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 
 import java.time.LocalDateTime;
@@ -16,12 +18,19 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
     private String brand;
+    @Column(nullable = false)
     private int quantity;
+    @Column(nullable = false)
     private int discount;
+    @Column(nullable = false)
     private double weight;
+    @Column(nullable = false)
     private double price;
     /*@EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -58,7 +67,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category>categories;
+    @CreatedDate
     private LocalDateTime create_time;
+    @LastModifiedDate
     private LocalDateTime update_time;
 
 }
