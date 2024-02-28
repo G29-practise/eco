@@ -1,5 +1,6 @@
 package org.example.eco.product.category.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class Category {
     @Id
     private UUID id;
+    @Column(unique = true)
     private String name;
     @ManyToMany(mappedBy = "categories")
     @EqualsAndHashCode.Exclude
