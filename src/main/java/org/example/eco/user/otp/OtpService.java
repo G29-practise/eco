@@ -23,11 +23,11 @@ import java.util.Random;
 public class OtpService {
     private final OtpRepository otpRepository;
     private final Random random = new Random();
-    @Value("${onefit.otp.retry-wait-time}")
+    @Value("${eco.otp.retry-wait-time}")
     private int retryWaitTime;
-    @Value("${onefit.otp.retry-count}")
+    @Value("${eco.otp.retry-count}")
     private int retryCount;
-    @Value("${onefit.otp.time-to-live}")
+    @Value("${eco.otp.time-to-live}")
     private int timeToLive;
     private final String VERIFICATION_MESSAGE = "Your verification code is: %d%n";
     private final SmsNotificationService smsNotificationService;

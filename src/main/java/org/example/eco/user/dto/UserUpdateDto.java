@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserUpdateDto extends UserBaseDto {
 //    private AddressUpdateDto address;
 }

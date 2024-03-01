@@ -10,5 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCreateDto extends UserBaseDto {
+    private String password;
+
 //    private AddressCreateDto address;
 }

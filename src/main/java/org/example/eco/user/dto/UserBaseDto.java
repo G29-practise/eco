@@ -7,6 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserBaseDto {
+    private String username;
     private String fName;
     private String lName;
     private String phoneNumber;

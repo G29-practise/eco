@@ -12,9 +12,9 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    @Value("${onefit.security.token.expiration}")
+    @Value("${eco.security.token.expiration}")
     private long expiration;
-    @Value("${onefit.security.token.secret}")
+    @Value("${eco.security.token.secret}")
     private String secret;
 
     public String generateToken(String phoneNumber) {
