@@ -5,9 +5,9 @@ import lombok.*;
 import org.example.eco.order.entity.Order;
 import org.example.eco.product.category.entity.Category;
 import org.example.eco.rating.entity.Rating;
+import org.example.eco.productSet.entity.ProductSet;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -16,6 +16,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "`product`")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -39,17 +40,6 @@ public class Product {
     @ToString.Exclude
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
     private Set<Rating> ratings;
-
-    /*@EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "product_liked",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "liked_id")
-    )
-    private Set<Liked> likeds;*/
-
     @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -64,19 +54,26 @@ public class Product {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<Cart> carts;*/
-
+    /*@OneToMany(mappedBy = "product")
+    private Set<Rating> ratings;
+    @OneToMany(mappedBy = "productId")
+    private Set<ProductSet> productSets;
+    @ManyToMany(mappedBy = "products")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Wishlist> wishlists;*/
+    
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
+            inverseJoinColumns = @JoinColumn(name = "category_name")
     )
     private Set<Category> categories;
     @CreatedDate
     private LocalDateTime create_time;
     @LastModifiedDate
     private LocalDateTime update_time;
-
 }

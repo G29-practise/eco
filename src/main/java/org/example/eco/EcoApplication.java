@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing
 @EnableFeignClients
 public class EcoApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(EcoApplication.class, args);
     }
