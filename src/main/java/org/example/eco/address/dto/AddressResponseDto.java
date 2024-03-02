@@ -1,16 +1,16 @@
-package org.example.eco.user.dto;
+package org.example.eco.address.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreateDto extends UserBaseDto {
-    private String password;
-
-//    private AddressCreateDto address;
+public class AddressResponseDto extends AddressDto {
+    private UUID id;
 }

@@ -2,7 +2,9 @@ package org.example.eco.product.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.eco.order.entity.Order;
 import org.example.eco.product.category.entity.Category;
+import org.example.eco.rating.entity.Rating;
 import org.example.eco.productSet.entity.ProductSet;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,6 +35,25 @@ public class Product {
     private double weight;
     @Column(nullable = false)
     private double price;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+    private Set<Rating> ratings;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinTable(
+            name = "product_order",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private Set<Order> orders;
+
+    /*@ManyToMany(mappedBy = "products")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Cart> carts;*/
     /*@OneToMany(mappedBy = "product")
     private Set<Rating> ratings;
     @OneToMany(mappedBy = "productId")
@@ -40,11 +61,8 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Wishlist> wishlists;
-    @ManyToMany(mappedBy = "products")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Set<Order> orders;*/
+    private Set<Wishlist> wishlists;*/
+    
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
@@ -53,10 +71,9 @@ public class Product {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_name")
     )
-    private Set<Category>categories;
+    private Set<Category> categories;
     @CreatedDate
     private LocalDateTime create_time;
     @LastModifiedDate
     private LocalDateTime update_time;
-
 }
