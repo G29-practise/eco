@@ -2,6 +2,9 @@ package org.example.eco.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.eco.address.entity.Address;
+import org.example.eco.order.entity.Order;
+import org.example.eco.rating.entity.Rating;
 import org.example.eco.user.permission.entity.Permission;
 import org.example.eco.user.role.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
@@ -53,6 +56,21 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
     private Set<Permission> permissions;
+
+    @OneToMany(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Rating> ratings;
+
+    @OneToMany(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Order> orders;
+
+    @OneToOne(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Address address;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
