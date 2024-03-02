@@ -25,5 +25,4 @@ public class ProductSet {
     /*@ManyToOne
     //@JoinColumn(name = "cartId", updatable = false)
     private Cart cartId;*/
-
 }
