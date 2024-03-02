@@ -3,9 +3,9 @@ package org.example.eco.product.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.eco.product.category.entity.Category;
+import org.example.eco.productSet.entity.ProductSet;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -14,6 +14,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "`product`")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -32,39 +33,25 @@ public class Product {
     private double weight;
     @Column(nullable = false)
     private double price;
-    /*@EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "product_rating",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "rating_id")
-    )
+    /*@OneToMany(mappedBy = "product")
     private Set<Rating> ratings;
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "product_liked",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "liked_id")
-    )
-    private Set<Liked> likeds;
+    @OneToMany(mappedBy = "productId")
+    private Set<ProductSet> productSets;
     @ManyToMany(mappedBy = "products")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Order> orders;
+    private Set<Wishlist> wishlists;
     @ManyToMany(mappedBy = "products")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Cart> carts;*/
+    private Set<Order> orders;*/
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "product_category",
             joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
+            inverseJoinColumns = @JoinColumn(name = "category_name")
     )
     private Set<Category>categories;
     @CreatedDate
