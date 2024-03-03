@@ -1,13 +1,13 @@
 services:
   eco-postgres:
-    container_name: eco-postgres
     image: 'postgres:16'
-    environment:
-      - 'POSTGRES_DB=eco-postgres'
-      - 'POSTGRES_PASSWORD=postgres'
-      - 'POSTGRES_USER=postgres'
+    container_name: eco-postgres
     ports:
       - '2000:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: eco_postgres
   eco-redis:
     container_name: eco-redis
     image: 'redis:7.2.4'

@@ -20,16 +20,8 @@ public class Address {
     private String country;
     private int postCode;
     private String region;
-
     @OneToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Order order;
-
-    @OneToOne
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private User user;
-
-
 }

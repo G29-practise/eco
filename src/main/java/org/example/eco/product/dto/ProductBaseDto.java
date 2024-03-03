@@ -15,5 +15,4 @@ public class ProductBaseDto {
     private int discount;
     private double weight;
     private double price;
-
 }

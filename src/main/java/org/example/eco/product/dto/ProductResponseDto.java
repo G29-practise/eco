@@ -16,11 +16,11 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 public class ProductResponseDto extends ProductBaseDto{
     private UUID id;
-    //private Set<RatingResponseDto> ratings;
+    private int rating;
     //private Set<WishlistResponseDto> wishlists;
     //private Set<OrderResponseDto> orders;
     private Set<ProductSetResponseDto> productSets;
-    private Set<CategoryResponseDto> categories;
-    private LocalDateTime create_time;
-    private LocalDateTime update_time;
+    private Set<String> categories;
+    private LocalDateTime created;
+    private LocalDateTime updated;
 }

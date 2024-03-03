@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: /03.03.2024-create-user-table/03.03.2024-create-user-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: /03.03.2024-create-role-permission-table/03.03.2024-create-role-permission-table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: /03.03.2024-create-default-role-and-permissions/03.03.2024-create-default-role-and-permissions.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: /03.03.2024-create-product-category-table/03.03.2024-create-product-category-table.yaml
+      relativeToChangelogFile: true

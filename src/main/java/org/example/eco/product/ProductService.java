@@ -12,7 +12,6 @@ import org.example.eco.product.dto.ProductUpdateDto;
 import org.example.eco.product.entity.Product;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -31,9 +30,10 @@ public class ProductService extends GenericService<Product,UUID, ProductCreateDt
     protected ProductResponseDto internalCreate(ProductCreateDto productCreateDto) {
         Product product = mapper.toEntity(productCreateDto);
 
-        Set<Category> dtoCategoryNames = product.getCategories();
+        Set<String> dtoCategoryNames = productCreateDto.getCategories();
 
-        Set<Category> categories = categoryRepository.findAllByNameIn(productCreateDto.getCategories());
+        Set<Category> categories = categoryRepository.findAllByNameIn(dtoCategoryNames);
+
         if(dtoCategoryNames.size() != categories.size()){
             Set<String> categoryNames = categories
                     .stream()
@@ -44,9 +44,6 @@ public class ProductService extends GenericService<Product,UUID, ProductCreateDt
             throw new EntityNotFoundException("Category with these names are not found.Categories: %s "
                     .formatted(dtoCategoryNames));
         }
-
-        //setCategories(productCreateDto, product);
-
 
         product.setCategories(categories);
         product.setId(UUID.randomUUID());
@@ -72,14 +69,14 @@ public class ProductService extends GenericService<Product,UUID, ProductCreateDt
                         () -> new EntityNotFoundException("Product with name: %s not found".formatted(productTitle)));
         return mapper.toResponseDto(product);
     }
-    private void setCategories(ProductCreateDto dto, Product product) {
-        if (Objects.nonNull(dto.getCategories())) {
-            Set<Category> categorySet = dto.getCategories()
-                    .stream()
-                    .map((catName) -> categoryRepository.findByName(catName)
-                            .orElseThrow(EntityNotFoundException::new)
-                    ).collect(Collectors.toSet());
-            product.setCategories(categorySet);
-        }
-    }
+//    private void setCategories(ProductCreateDto dto, Product product) {
+//        if (Objects.nonNull(dto.getCategories())) {
+//            Set<Category> categorySet = dto.getCategories()
+//                    .stream()
+//                    .map((catName) -> categoryRepository.findByName(catName)
+//                            .orElseThrow(EntityNotFoundException::new)
+//                    ).collect(Collectors.toSet());
+//            product.setCategories(categorySet);
+//        }
+//    }
 }

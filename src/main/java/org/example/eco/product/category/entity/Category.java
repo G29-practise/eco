@@ -16,11 +16,9 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Category {
     @Id
-    private UUID id;
-    @Column(unique = true)
     private String name;
     @ManyToMany(mappedBy = "categories")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Product> productList;
+    private Set<Product> products;
 }

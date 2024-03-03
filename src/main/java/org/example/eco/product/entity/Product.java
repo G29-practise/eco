@@ -8,6 +8,7 @@ import org.example.eco.rating.entity.Rating;
 import org.example.eco.productSet.entity.ProductSet;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "`product`")
+@EntityListeners(AuditingEntityListener.class)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,7 +31,6 @@ public class Product {
     private String brand;
     @Column(nullable = false)
     private int quantity;
-    @Column(nullable = false)
     private int discount;
     @Column(nullable = false)
     private double weight;
@@ -38,7 +39,7 @@ public class Product {
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Rating> ratings;
     @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
@@ -73,7 +74,7 @@ public class Product {
     )
     private Set<Category> categories;
     @CreatedDate
-    private LocalDateTime create_time;
+    private LocalDateTime created;
     @LastModifiedDate
-    private LocalDateTime update_time;
+    private LocalDateTime updated;
 }

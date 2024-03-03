@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 public class UserUpdateDto extends UserBaseDto {
-//    private AddressUpdateDto address;
 }
