@@ -2,7 +2,6 @@ package org.example.eco.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.eco.address.entity.Address;
 import org.example.eco.order.entity.Order;
 import org.example.eco.rating.entity.Rating;
 import org.example.eco.user.permission.entity.Permission;

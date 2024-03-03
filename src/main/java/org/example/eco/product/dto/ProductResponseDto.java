@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.example.eco.product.category.dto.CategoryResponseDto;
 import org.example.eco.productSet.dto.ProductSetResponseDto;
 
 import java.time.LocalDateTime;

@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.*;
 import org.example.eco.order.entity.Order;
-import org.example.eco.user.entity.User;
 
 import java.util.UUID;
 

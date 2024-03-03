@@ -5,7 +5,6 @@ import lombok.*;
 import org.example.eco.order.entity.Order;
 import org.example.eco.product.category.entity.Category;
 import org.example.eco.rating.entity.Rating;
-import org.example.eco.productSet.entity.ProductSet;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

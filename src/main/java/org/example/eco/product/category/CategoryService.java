@@ -9,7 +9,6 @@ import org.example.eco.product.category.dto.CategoryUpdateDto;
 import org.example.eco.product.category.entity.Category;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Service
 @Getter
