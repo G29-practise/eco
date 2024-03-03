@@ -13,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "`order`")
 public class Order {
     @Id
     private UUID id;
@@ -24,7 +25,7 @@ public class Order {
     @ManyToMany(mappedBy = "orders")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Product> productList;
+    private Set<Product> products;
 
     @OneToOne(mappedBy = "order")
     @EqualsAndHashCode.Exclude

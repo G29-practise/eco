@@ -20,6 +20,5 @@ public class UserResponseDto extends UserBaseDto{
     private Set<RoleResponseDto> roles;
     private Set<String> permissions;
 //    private CartResponseDto cart;
-//    private Set<CardResponseDto> cards;
 //    private Set<OrderResponseDto> orders;
 }

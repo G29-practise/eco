@@ -11,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/category")
@@ -22,7 +21,7 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<CategoryResponseDto>createCategory(@RequestBody @Valid CategoryCreateDto categoryCreateDto){
-        CategoryResponseDto categoryResponseDto = categoryService.internalCreate(categoryCreateDto);
+        CategoryResponseDto categoryResponseDto = categoryService.create(categoryCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(categoryResponseDto);
@@ -34,19 +33,19 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponseDtoPage);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponseDto>getCategory(@PathVariable UUID id){
-        CategoryResponseDto categoryResponseDto = categoryService.get(id);
+    @GetMapping("/{name}")
+    public ResponseEntity<CategoryResponseDto>getCategory(@PathVariable String name){
+        CategoryResponseDto categoryResponseDto = categoryService.get(name);
         return ResponseEntity.ok(categoryResponseDto);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CategoryResponseDto>updateCategory(@PathVariable UUID id, @RequestBody CategoryUpdateDto categoryUpdateDto){
-        CategoryResponseDto categoryResponseDto = categoryService.internalUpdate(id,categoryUpdateDto);
+    @PutMapping("/{name}")
+    public ResponseEntity<CategoryResponseDto>updateCategory(@PathVariable String name, @RequestBody CategoryUpdateDto categoryUpdateDto){
+        CategoryResponseDto categoryResponseDto = categoryService.update(name,categoryUpdateDto);
         return ResponseEntity.ok(categoryResponseDto);
     }
-    @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable UUID id){
-        categoryService.delete(id);
+    @DeleteMapping("/{name}")
+    public void deleteCategory(@PathVariable String name){
+        categoryService.delete(name);
     }
 }

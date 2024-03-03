@@ -21,7 +21,7 @@ public class RatingDtoMapper extends GenericMapper<Rating, RatingCreateDto, Rati
 
     @Override
     public RatingResponseDto toResponseDto(Rating rating) {
-        String userName = rating.getUser().getFName();
+        String userName = rating.getUser().getName();
         String productName = rating.getProduct().getTitle();
         RatingResponseDto responseDto = mapper.map(rating, RatingResponseDto.class);
         responseDto.setUser(userName);

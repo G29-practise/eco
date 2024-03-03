@@ -2,11 +2,13 @@ package org.example.eco.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.eco.address.entity.Address;
 import org.example.eco.order.entity.Order;
 import org.example.eco.rating.entity.Rating;
 import org.example.eco.user.permission.entity.Permission;
 import org.example.eco.user.role.entity.Role;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,21 +24,23 @@ import java.util.stream.Stream;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "`user`")
 public class User implements UserDetails {
     @Id
     private UUID id;
-    private String fName;
-    private String lName;
+    private String name;
+    private String surname;
     private String phoneNumber;
     private String email;
+    @CreatedDate
     private LocalDateTime created;
+    @LastModifiedDate
     private LocalDateTime updated;
 //    private Cart cart;
-//    private Set<Card> cards;
 //    private Set<Order> orders;
-//    private Address address;
-    private String username;
     private String password;
+    private boolean isVerify;
     @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -67,11 +71,6 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Set<Order> orders;
 
-    @OneToOne(mappedBy = "user")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Address address;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Stream<Permission> rolePermissionStream = roles.stream()
@@ -89,7 +88,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

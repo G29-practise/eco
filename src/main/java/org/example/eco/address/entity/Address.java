@@ -5,7 +5,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.*;
 import org.example.eco.order.entity.Order;
-import org.example.eco.user.entity.User;
 
 import java.util.UUID;
 
@@ -20,16 +19,8 @@ public class Address {
     private String country;
     private int postCode;
     private String region;
-
     @OneToOne
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Order order;
-
-    @OneToOne
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private User user;
-
-
 }

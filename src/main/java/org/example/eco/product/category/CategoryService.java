@@ -9,13 +9,11 @@ import org.example.eco.product.category.dto.CategoryUpdateDto;
 import org.example.eco.product.category.entity.Category;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Service
 @Getter
 @RequiredArgsConstructor
-public class CategoryService extends GenericService<Category, UUID, CategoryCreateDto, CategoryResponseDto, CategoryUpdateDto> {
-
+public class CategoryService extends GenericService<Category, String, CategoryCreateDto, CategoryResponseDto, CategoryUpdateDto> {
     private final CategoryDtoMapper mapper;
     private final CategoryRepository repository;
     private final Class<Category>entityClass = Category.class;
@@ -23,25 +21,19 @@ public class CategoryService extends GenericService<Category, UUID, CategoryCrea
     @Override
     protected CategoryResponseDto internalCreate(CategoryCreateDto categoryCreateDto) {
         Category entity = mapper.toEntity(categoryCreateDto);
-        entity.setId(UUID.randomUUID());
         Category saved = repository.save(entity);
         return mapper.toResponseDto(saved);
     }
 
     @Override
-    protected CategoryResponseDto internalUpdate(UUID uuid, CategoryUpdateDto categoryUpdateDto) {
-        Category category = repository.findById(uuid).orElseThrow(
-                () -> new EntityNotFoundException("Category with id: %s not fount".formatted(uuid)));
-        mapper.toEntity(categoryUpdateDto,category);
-        Category saved = repository.save(category);
-
-        return mapper.toResponseDto(saved);
-    }
-    public CategoryResponseDto getByName(String name){
+    protected CategoryResponseDto internalUpdate(String id, CategoryUpdateDto categoryUpdateDto) {
         Category category = repository
-                .findByName(name)
+                .findById(id)
                 .orElseThrow(
-                        () -> new EntityNotFoundException("Category with name: %s not found".formatted(name)));
-        return mapper.toResponseDto(category);
+                        () -> new EntityNotFoundException("Category not found")
+                );
+        mapper.toEntity(categoryUpdateDto, category);
+        Category saved = repository.save(category);
+        return mapper.toResponseDto(saved);
     }
 }
