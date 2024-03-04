@@ -4,9 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.eco.cart.dto.CartCreateDto;
 import org.example.eco.cart.dto.CartResponseDto;
 import org.example.eco.cart.dto.CartUpdateDto;
-import org.example.eco.commit.dto.CommitCreateDTO;
-import org.example.eco.commit.dto.CommitResponseDto;
-import org.example.eco.commit.dto.CommitUpdateDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -20,23 +17,22 @@ import java.util.UUID;
 @RequestMapping("/cart")
 public class CartController {
     private final CartService cartService;
-    @PreAuthorize("hasAnyAuthority('cart:create')")
-
-    @PostMapping("/create")
+//    @PreAuthorize("hasAnyAuthority('cart:create')")
+    @PostMapping
     public ResponseEntity<CartResponseDto> create(@RequestBody CartCreateDto cartCreateDto){
         CartResponseDto cartResponseDto = cartService.create(cartCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(cartResponseDto);
     }
-    @PreAuthorize("hasAnyAuthority('commit:read')")
+//    @PreAuthorize("hasAnyAuthority('commit:read')")
 
     @GetMapping("/{id}")
     public ResponseEntity<CartResponseDto> getId(@PathVariable UUID id){
         CartResponseDto cartResponseDto = cartService.get(id);
         return ResponseEntity.ok(cartResponseDto);
     }
-    @PreAuthorize("hasAnyAuthority('commit:read')")
+//    @PreAuthorize("hasAnyAuthority('commit:read')")
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<Page<CartResponseDto>> getAll(Pageable pageable, @RequestParam(required = false) String predicate){
         Page<CartResponseDto> all = cartService.getAll(predicate, pageable);
         return ResponseEntity.ok(all);

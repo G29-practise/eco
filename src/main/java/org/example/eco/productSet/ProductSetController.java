@@ -21,7 +21,7 @@ public class ProductSetController {
 
     @PostMapping
     public ResponseEntity<ProductSetResponseDto>createProductSet(@RequestBody @Valid ProductSetCreateDto productSetCreateDto){
-        ProductSetResponseDto productSetResponseDto = productSetService.internalCreate(productSetCreateDto);
+        ProductSetResponseDto productSetResponseDto = productSetService.create(productSetCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(productSetResponseDto);
@@ -41,7 +41,7 @@ public class ProductSetController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProductSetResponseDto>updateProductSet(@PathVariable UUID id, @RequestBody ProductSetUpdateDto productSetUpdateDto){
-        ProductSetResponseDto productSetResponseDto = productSetService.internalUpdate(id,productSetUpdateDto);
+        ProductSetResponseDto productSetResponseDto = productSetService.update(id,productSetUpdateDto);
         return ResponseEntity.ok(productSetResponseDto);
     }
     @DeleteMapping("/{id}")

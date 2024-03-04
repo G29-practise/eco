@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.example.eco.productSet.dto.ProductSetResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -18,7 +17,7 @@ public class ProductResponseDto extends ProductBaseDto{
     private int rating;
     //private Set<WishlistResponseDto> wishlists;
     //private Set<OrderResponseDto> orders;
-    private Set<ProductSetResponseDto> productSets;
+//    private Set<ProductSetResponseDto> productSets;
     private Set<String> categories;
     private LocalDateTime created;
     private LocalDateTime updated;

@@ -1,8 +1,9 @@
 package org.example.eco.user.dto;
 
-import lombok.*;
-import org.example.eco.cart.dto.CartResponseDtoForUser;
-import org.example.eco.order.dto.OrderResponseDtoForUser;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.example.eco.user.role.dto.RoleResponseDto;
 
 import java.time.LocalDateTime;
@@ -12,12 +13,10 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto extends UserBaseDto{
+public class UserResponseDtoForCartAndOrder extends UserBaseDto{
     private UUID id;
     private LocalDateTime created;
     private LocalDateTime updated;
     private Set<RoleResponseDto> roles;
     private Set<String> permissions;
-    private CartResponseDtoForUser cart;
-    private Set<OrderResponseDtoForUser> orders;
 }

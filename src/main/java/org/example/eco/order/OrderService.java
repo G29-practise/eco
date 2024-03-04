@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.example.eco.address.AddressRepository;
+import org.example.eco.address.AddressService;
 import org.example.eco.address.entity.Address;
 import org.example.eco.common.service.GenericService;
 import org.example.eco.order.dto.OrderCreateDto;
@@ -26,10 +27,11 @@ import java.util.UUID;
 @Getter
 public class OrderService extends GenericService<Order, UUID, OrderCreateDto, OrderResponseDto, OrderUpdateDto> {
     private final OrderRepository repository;
-    private final Class<Order> entityClass= Order.class;
+    private final Class<Order> entityClass = Order.class;
     private final OrderDtoMapper mapper;
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
+    private final AddressService addressService;
     private final ProductSetRepository productSetRepository;
 
 
@@ -37,31 +39,46 @@ public class OrderService extends GenericService<Order, UUID, OrderCreateDto, Or
     protected OrderResponseDto internalCreate(OrderCreateDto orderCreateDto) {
 
         Order order = mapper.toEntity(orderCreateDto);
-        order.setId(UUID.randomUUID());
+        UUID userId = orderCreateDto.getUserId();
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
 
-        User user = userRepository.findById(orderCreateDto.getUser_Id()).orElseThrow(() -> new IllegalArgumentException("User not found with id: " + orderCreateDto.getUser_Id()));
-        order.setUser(user);
 
-        Address save = addressRepository.save(orderCreateDto.getAddress());
-        order.setAddress(save);
+        Address address = new Address();
+        String city = orderCreateDto.getCity();
+        String region = orderCreateDto.getRegion();
+        String country = orderCreateDto.getCountry();
+        int postCode = orderCreateDto.getPostCode();
+        address.setCity(city);
+        address.setCountry(country);
+        address.setRegion(region);
+        address.setPostCode(postCode);
+        address.setId(UUID.randomUUID());
+        address.setOrder(order);
 
-        Set<Product> products1=new HashSet<>();
-        for (ProductSet productSet : orderCreateDto.getCart().getProductSets()) {
-            Product productId = productSet.getProductId();
-            products1.add(productId);
+        Set<Product> products = new HashSet<>();
+        Set<ProductSet> productSets = user.getCart().getProducts();
+        if (productSets != null) {
+            for (ProductSet productSet : productSets) {
+                Product product = productSet.getProduct();
+                products.add(product);
+            }
         }
+        order.setProducts(products);
+        order.setId(UUID.randomUUID());
+        order.setUser(user);
+        order.setAddress(address);
 
-        order.setProductList(products1);
-
-
-        return mapper.toResponseDto(order);
+        userRepository.save(user);
+        Order saved = repository.save(order);
+        addressRepository.save(address);
+        return mapper.toResponseDto(saved);
     }
 
     @Override
     protected OrderResponseDto internalUpdate(UUID uuid, OrderUpdateDto orderUpdateDto) {
 
         Order order = repository.findById(uuid).orElseThrow(EntityNotFoundException::new);
-        mapper.toEntity(orderUpdateDto,order);
+        mapper.toEntity(orderUpdateDto, order);
         Order order1 = repository.save(order);
 
         return mapper.toResponseDto(order1);

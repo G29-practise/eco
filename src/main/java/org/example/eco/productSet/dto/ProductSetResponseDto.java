@@ -3,7 +3,7 @@ package org.example.eco.productSet.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.eco.product.entity.Product;
+import org.example.eco.product.dto.ProductResponseDto;
 
 import java.util.UUID;
 
@@ -13,6 +13,6 @@ import java.util.UUID;
 public class ProductSetResponseDto {
     private UUID id;
     private int quantity;
-    private Product product;
-    //private Cart cart;
+    private ProductResponseDto product;
+//    private CartResponseDto cart;
 }

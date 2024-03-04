@@ -9,13 +9,10 @@ import org.example.eco.cart.dto.CartUpdateDto;
 import org.example.eco.cart.entity.Cart;
 import org.example.eco.common.service.GenericService;
 import org.example.eco.productSet.ProductSetRepository;
-import org.example.eco.productSet.entity.ProductSet;
 import org.example.eco.user.UserRepository;
 import org.example.eco.user.entity.User;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -30,20 +27,17 @@ public class CartService extends GenericService<Cart, UUID, CartCreateDto, CartR
 
     @Override
     protected CartResponseDto internalCreate(CartCreateDto cartCreateDto) {
-        Cart entity = mapper.toEntity(cartCreateDto);
-        User user = userRepository.findById(cartCreateDto.getUser_Id()).orElseThrow(() -> new IllegalArgumentException("User not found with id: " + cartCreateDto.getUser_Id()));
-        
-        Set<ProductSet> productSets = new HashSet<>();
-        for (UUID productId : cartCreateDto.getProductSet_Id()) {
-            ProductSet productSet = getProductSetRepository().findById(productId).orElseThrow(() -> new IllegalArgumentException("Product not found with id: " + productId));
-            productSets.add(productSet);
-        }
-        
-        entity.setId(UUID.randomUUID());
-        entity.setUser(user);
-        entity.setProductSets(productSets);
+        Cart cart = mapper.toEntity(cartCreateDto);
+        UUID userId = cartCreateDto.getUserId();
+        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
 
-        return mapper.toResponseDto(entity);
+        cart.setId(UUID.randomUUID());
+        cart.setUser(user);
+
+        userRepository.save(user);
+
+        Cart saved = repository.save(cart);
+        return mapper.toResponseDto(saved);
     }
 
     @Override

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.eco.order.entity.Order;
 import org.example.eco.product.category.entity.Category;
+import org.example.eco.productSet.entity.ProductSet;
 import org.example.eco.rating.entity.Rating;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -40,6 +41,7 @@ public class Product {
     @ToString.Exclude
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Rating> ratings;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -50,18 +52,20 @@ public class Product {
     )
     private Set<Order> orders;
 
-    /*@ManyToMany(mappedBy = "products")
+//    @ManyToMany(mappedBy = "products")
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    private Set<Cart> carts;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<Cart> carts;*/
-    /*@OneToMany(mappedBy = "product")
-    private Set<Rating> ratings;
-    @OneToMany(mappedBy = "productId")
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ProductSet> productSets;
-    @ManyToMany(mappedBy = "products")
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private Set<Wishlist> wishlists;*/
+
+//    @ManyToMany(mappedBy = "products")
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    private Set<Wishlist> wishlists;
     
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

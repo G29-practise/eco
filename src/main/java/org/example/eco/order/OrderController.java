@@ -19,22 +19,21 @@ import java.util.UUID;
 public class OrderController {
     private final OrderService orderService;
     @PreAuthorize("hasAnyAuthority('order:create')")
-
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<OrderResponseDto> create(@RequestBody OrderCreateDto orderCreateDto){
         OrderResponseDto orderResponseDto = orderService.create(orderCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderResponseDto);
     }
-    @PreAuthorize("hasAnyAuthority('order:read')")
 
+    @PreAuthorize("hasAnyAuthority('order:read')")
     @GetMapping("/{id}")
     public OrderResponseDto getId(@PathVariable UUID id){
         OrderResponseDto orderResponseDto = orderService.get(id);
         return orderResponseDto;
     }
-    @PreAuthorize("hasAnyAuthority('order:read')")
 
-    @GetMapping("/getAll")
+    @PreAuthorize("hasAnyAuthority('order:read')")
+    @GetMapping
     public Page<OrderResponseDto> getAll(Pageable pageable, @RequestParam(required = false) String predicate){
         return orderService.getAll(predicate, pageable);
     }

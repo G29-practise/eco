@@ -1,9 +1,7 @@
 package org.example.eco.cart.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.eco.productSet.entity.ProductSet;
 import org.example.eco.user.entity.User;
 
@@ -20,7 +18,8 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private Set<ProductSet> productSets;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<ProductSet> products;
 }

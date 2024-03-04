@@ -29,7 +29,6 @@ public class UserDtoMapper extends GenericMapper<User, UserCreateDto, UserRespon
 
     @Override
     public UserResponseDto toResponseDto(User user) {
-
         UserResponseDto responseDto = mapper.map(user, UserResponseDto.class);
 
         Set<RoleResponseDto> roles = user

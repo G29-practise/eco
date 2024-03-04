@@ -13,5 +13,5 @@ import java.util.UUID;
 public class ProductSetCreateDto {
     private int quantity;
     private UUID productId;
-    private UUID cart;
+    private UUID cartId;
 }

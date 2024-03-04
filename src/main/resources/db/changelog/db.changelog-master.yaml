@@ -9,5 +9,8 @@ databaseChangeLog:
       file: /03.03.2024-create-default-role-and-permissions/03.03.2024-create-default-role-and-permissions.yaml
       relativeToChangelogFile: true
   - include:
+      file: /03.03.2024-create-cart-table/03.03.2024-create-cart-table.yaml
+      relativeToChangelogFile: true
+  - include:
       file: /03.03.2024-create-product-category-table/03.03.2024-create-product-category-table.yaml
       relativeToChangelogFile: true
