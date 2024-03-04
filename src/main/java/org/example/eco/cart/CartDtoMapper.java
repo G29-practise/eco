@@ -20,6 +20,8 @@ public class CartDtoMapper extends GenericMapper<Cart, CartCreateDto, CartRespon
 
     @Override
     public CartResponseDto toResponseDto(Cart cart) {
+//        String userName = cart.getUser().getName();
+        //        cartResponseDto.setUserName(userName);
         return mapper.map(cart, CartResponseDto.class);
     }
 

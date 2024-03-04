@@ -3,6 +3,8 @@ package org.example.eco.productSet;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.example.eco.cart.CartRepositoriy;
+import org.example.eco.cart.entity.Cart;
 import org.example.eco.common.service.GenericService;
 import org.example.eco.product.ProductRepository;
 import org.example.eco.product.entity.Product;
@@ -22,34 +24,35 @@ public class ProductSetService extends GenericService<ProductSet, UUID, ProductS
     private final Class<ProductSet> entityClass = ProductSet.class;
     private final ProductSetDtoMapper mapper;
     private final ProductRepository productRepository;
-    //private final CartRepository cartRepository;
+    private final CartRepositoriy cartRepository;
 
     @Override
     protected ProductSetResponseDto internalCreate(ProductSetCreateDto createDto) {
         ProductSet productSet = mapper.toEntity(createDto);
-        setProduct(createDto, productSet);
-        //setCart(createDto, productSet);
-        return mapper.toResponseDto(repository.save(productSet));
+
+        UUID productId = createDto.getProductId();
+        Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        productSet.setProduct(product);
+
+        UUID cartId = createDto.getCartId();
+        Cart cart = cartRepository.findById(cartId).orElseThrow(() -> new EntityNotFoundException("Cart not found"));
+        productSet.setCart(cart);
+
+        productSet.setId(UUID.randomUUID());
+        productRepository.save(product);
+        cartRepository.save(cart);
+        ProductSet saved = repository.save(productSet);
+        return mapper.toResponseDto(saved);
     }
 
     @Override
     protected ProductSetResponseDto internalUpdate(UUID uuid, ProductSetUpdateDto updateDto) {
         ProductSet productSet = repository.findById(uuid).orElseThrow(
                 () -> new EntityNotFoundException("ProductSet with id: %s not fount".formatted(uuid)));
-        mapper.toEntity(updateDto,productSet);
+        mapper.toEntity(updateDto, productSet);
         ProductSet saved = repository.save(productSet);
 
         return mapper.toResponseDto(saved);
     }
-
-    private void setProduct(ProductSetCreateDto createDto, ProductSet productSet) {
-        Product product = productRepository.findById(createDto.getProductId()).orElseThrow(EntityNotFoundException::new);
-        productSet.setProductId(product);
-    }
-
-   /* private void setCart(ProductSetCreateDto createDto, ProductSet productSet) {
-        Cart cart = cartRepository.findById(createDto.getCart().getId()).orElseThrow(EntityNotFoundException::new);
-        productSet.setCart(cart);
-    }*/
 
 }

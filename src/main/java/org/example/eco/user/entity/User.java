@@ -2,6 +2,7 @@ package org.example.eco.user.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.eco.cart.entity.Cart;
 import org.example.eco.order.entity.Order;
 import org.example.eco.rating.entity.Rating;
 import org.example.eco.user.permission.entity.Permission;
@@ -37,7 +38,10 @@ public class User implements UserDetails {
     private LocalDateTime created;
     @LastModifiedDate
     private LocalDateTime updated;
-//    private Cart cart;
+    @OneToOne(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Cart cart;
 //    private Set<Order> orders;
     private String password;
     private boolean isVerify;

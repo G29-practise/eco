@@ -1,4 +1,4 @@
 package org.example.eco.order.dto;
 
-public class OrderUpdateDto extends OrderBaseDto{
+public class OrderUpdateDto{
 }

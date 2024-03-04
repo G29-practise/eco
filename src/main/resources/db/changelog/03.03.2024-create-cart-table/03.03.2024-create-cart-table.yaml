@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cart-table
+      author: developercruela@gmail.com
+      changes:
+        - sqlFile:
+            path: 03.03.2024-create-cart-table.sql
+            relativeToChangelogFile: true

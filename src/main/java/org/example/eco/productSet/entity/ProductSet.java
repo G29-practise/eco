@@ -7,6 +7,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.eco.cart.entity.Cart;
 import org.example.eco.product.entity.Product;
 
 import java.util.UUID;
@@ -20,9 +21,9 @@ public class ProductSet {
     private UUID id;
     private int quantity;
     @ManyToOne
-    @JoinColumn(name = "productId", updatable = false)
-    private Product productId;
-    /*@ManyToOne
-    //@JoinColumn(name = "cartId", updatable = false)
-    private Cart cartId;*/
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 }

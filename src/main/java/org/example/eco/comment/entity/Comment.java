@@ -1,4 +1,4 @@
-package org.example.eco.commit.entity;
+package org.example.eco.comment.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Data
 @Entity
-public class Commit {
+public class Comment {
     @Id
     private UUID id;
     private String commit;

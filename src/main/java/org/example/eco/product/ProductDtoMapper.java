@@ -39,6 +39,7 @@ public class ProductDtoMapper extends GenericMapper<Product, ProductCreateDto, P
         ProductResponseDto productResponseDto = mapper.map(product, ProductResponseDto.class);
         productResponseDto.setRating(rating);
         productResponseDto.setCategories(categories);
+//        product.get
         return productResponseDto;
     }
 
