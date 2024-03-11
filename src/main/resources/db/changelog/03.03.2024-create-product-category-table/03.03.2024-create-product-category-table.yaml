@@ -14,16 +14,16 @@ databaseChangeLog:
             path: 03.03.2024-create-product-rating-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: create-product-order-table
-      author: developercruela@gmail.com
-      changes:
-        - sqlFile:
-            path: 03.03.2024-create-product-order-table.sql
-            relativeToChangelogFile: true
-  - changeSet:
       id: create-product-set-table
       author: developercruela@gmai.com
       changes:
         - sqlFile:
             path: 03.03.2024-create-product-set-table.sql
+            relativeToChangelogFile: true
+  - changeSet:
+      id: create-product-order-table
+      author: developercruela@gmail.com
+      changes:
+        - sqlFile:
+            path: 03.03.2024-create-product-order-table.sql
             relativeToChangelogFile: true

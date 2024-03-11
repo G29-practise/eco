@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.eco.address.dto.AddressResponseDto;
-import org.example.eco.product.dto.ProductResponseDto;
+import org.example.eco.productSet.dto.ProductSetResponseDto;
 import org.example.eco.user.dto.UserResponseDtoForCartAndOrder;
 
 import java.util.Set;
@@ -18,5 +18,5 @@ public class OrderResponseDto{
     private UUID id;
     private AddressResponseDto address;
     private UserResponseDtoForCartAndOrder user;
-    private Set<ProductResponseDto> products;
+    private Set<ProductSetResponseDto> products;
 }

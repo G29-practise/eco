@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -21,7 +22,7 @@ public class AddressController {
 
     @PreAuthorize("hasAnyAuthority('address:create')")
     @PostMapping
-    public ResponseEntity<AddressResponseDto> create(@RequestBody @Valid AddressCreateDto addressCreateDto) {
+    public ResponseEntity<AddressResponseDto> create(@RequestBody @Valid AddressCreateDto addressCreateDto) throws IOException {
         AddressResponseDto addressResponseDto = service.create(addressCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(addressResponseDto);
     }

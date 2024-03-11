@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class CartController {
     private final CartService cartService;
 //    @PreAuthorize("hasAnyAuthority('cart:create')")
     @PostMapping
-    public ResponseEntity<CartResponseDto> create(@RequestBody CartCreateDto cartCreateDto){
+    public ResponseEntity<CartResponseDto> create(@RequestBody CartCreateDto cartCreateDto) throws IOException {
         CartResponseDto cartResponseDto = cartService.create(cartCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(cartResponseDto);
     }

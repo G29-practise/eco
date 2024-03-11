@@ -19,7 +19,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 public class CartService extends GenericService<Cart, UUID, CartCreateDto, CartResponseDto, CartUpdateDto> {
-    private final CartRepositoriy repository;
+    private final CartRepository repository;
     private final Class<Cart> entityClass= Cart.class;
     private final CartDtoMapper mapper;
     private final UserRepository userRepository;

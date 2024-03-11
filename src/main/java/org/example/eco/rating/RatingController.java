@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RequestMapping("/rating")
@@ -21,7 +22,7 @@ public class RatingController {
 
     @PreAuthorize("hasAnyAuthority('rating:create')")
     @PostMapping
-    public ResponseEntity<RatingResponseDto> create(@RequestBody @Valid RatingCreateDto createDto) {
+    public ResponseEntity<RatingResponseDto> create(@RequestBody @Valid RatingCreateDto createDto) throws IOException {
         RatingResponseDto ratingResponseDto = ratingService.create(createDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(ratingResponseDto);
     }

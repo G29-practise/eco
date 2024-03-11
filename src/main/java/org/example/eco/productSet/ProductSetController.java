@@ -10,17 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/productSet")
+@RequestMapping("/product-set")
 @RequiredArgsConstructor
 public class ProductSetController {
 
     private final ProductSetService productSetService;
 
     @PostMapping
-    public ResponseEntity<ProductSetResponseDto>createProductSet(@RequestBody @Valid ProductSetCreateDto productSetCreateDto){
+    public ResponseEntity<ProductSetResponseDto>createProductSet(@RequestBody @Valid ProductSetCreateDto productSetCreateDto) throws IOException {
         ProductSetResponseDto productSetResponseDto = productSetService.create(productSetCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -45,7 +46,8 @@ public class ProductSetController {
         return ResponseEntity.ok(productSetResponseDto);
     }
     @DeleteMapping("/{id}")
-    public void deleteProductSet(@PathVariable UUID id){
+    public ResponseEntity<ProductSetResponseDto> deleteProductSet(@PathVariable UUID id){
         productSetService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

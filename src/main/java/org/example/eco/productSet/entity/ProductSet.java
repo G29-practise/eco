@@ -1,15 +1,12 @@
 package org.example.eco.productSet.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import org.example.eco.cart.entity.Cart;
+import org.example.eco.order.entity.Order;
 import org.example.eco.product.entity.Product;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -26,4 +23,13 @@ public class ProductSet {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JoinTable(
+            name = "product_set_order",
+            joinColumns = @JoinColumn(name = "product_set_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private Set<Order> orders;
 }
