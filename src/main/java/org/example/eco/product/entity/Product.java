@@ -2,7 +2,6 @@ package org.example.eco.product.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.eco.order.entity.Order;
 import org.example.eco.product.category.entity.Category;
 import org.example.eco.productSet.entity.ProductSet;
 import org.example.eco.rating.entity.Rating;
@@ -42,15 +41,20 @@ public class Product {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Rating> ratings;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    @JoinTable(
-            name = "product_order",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
-    private Set<Order> orders;
+//    private String fileName;
+//    private String contentType;
+//    @Column(length = Integer.MAX_VALUE)
+//    private String img;
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @EqualsAndHashCode.Exclude
+//    @ToString.Exclude
+//    @JoinTable(
+//            name = "product_order",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "order_id")
+//    )
+//    private Set<Order> orders;
 
 //    @ManyToMany(mappedBy = "products")
 //    @EqualsAndHashCode.Exclude

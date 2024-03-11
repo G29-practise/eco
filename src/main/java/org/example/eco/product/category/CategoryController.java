@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/category")
@@ -20,7 +22,7 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity<CategoryResponseDto>createCategory(@RequestBody @Valid CategoryCreateDto categoryCreateDto){
+    public ResponseEntity<CategoryResponseDto>createCategory(@RequestBody @Valid CategoryCreateDto categoryCreateDto) throws IOException {
         CategoryResponseDto categoryResponseDto = categoryService.create(categoryCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

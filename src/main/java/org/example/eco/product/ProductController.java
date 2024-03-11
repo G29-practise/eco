@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 @RestController
 @RequestMapping("/product")
@@ -18,7 +19,7 @@ import java.util.UUID;
 public class ProductController {
     private final ProductService productService;
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductCreateDto productCreateDto){
+    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductCreateDto productCreateDto) throws IOException {
         ProductResponseDto productResponseDto = productService.internalCreate(productCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

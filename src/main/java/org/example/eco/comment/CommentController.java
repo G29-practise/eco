@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class CommentController {
     @PreAuthorize("hasAnyAuthority('commit:create')")
 
     @PostMapping("/create")
-    public ResponseEntity<CommentResponseDto> create(@RequestBody CommentCreateDTO commitCreateDTO){
+    public ResponseEntity<CommentResponseDto> create(@RequestBody CommentCreateDTO commitCreateDTO) throws IOException {
         CommentResponseDto commitResponseDto = commitService.create(commitCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(commitResponseDto);
     }

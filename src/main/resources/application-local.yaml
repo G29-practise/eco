@@ -1,4 +1,16 @@
 spring:
+  mail:
+    host: smtp.gmail.com
+    username: webstore.perfume@gmail.com
+    password: lnlzzizbarytqfnz
+    port: 465
+    protocol: smtps
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
   datasource:
     username: postgres
     password: postgres

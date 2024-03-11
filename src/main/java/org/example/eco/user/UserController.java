@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 @RestController
 @RequestMapping("/user")
@@ -23,7 +24,7 @@ public class UserController {
     private final JwtService jwtService;
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> create(@RequestBody UserCreateDto createDto) {
+    public ResponseEntity<UserResponseDto> create(@RequestBody UserCreateDto createDto) throws IOException {
         UserResponseDto responseDto = userService.create(createDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
@@ -63,7 +64,7 @@ public class UserController {
     @PostMapping("/auth/sign-up")
     public ResponseEntity<UserResponseDto> signUp(
             @RequestBody @Valid UserCreateDto userCreateDto
-    ) {
+    ) throws IOException {
         UserResponseDto userResponseDto = userService.create(userCreateDto);
         String token = jwtService.generateToken(userResponseDto.getPhoneNumber());
 

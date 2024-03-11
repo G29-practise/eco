@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -20,7 +21,7 @@ public class OrderController {
     private final OrderService orderService;
     @PreAuthorize("hasAnyAuthority('order:create')")
     @PostMapping
-    public ResponseEntity<OrderResponseDto> create(@RequestBody OrderCreateDto orderCreateDto){
+    public ResponseEntity<OrderResponseDto> create(@RequestBody OrderCreateDto orderCreateDto) throws IOException {
         OrderResponseDto orderResponseDto = orderService.create(orderCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(orderResponseDto);
     }

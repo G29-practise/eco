@@ -6,11 +6,12 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ProductCreateDto extends ProductBaseDto{
+public class ProductCreateDto extends ProductBaseDto {
     private Set<String> categories;
-
+//    private MultipartFile picture;
 }

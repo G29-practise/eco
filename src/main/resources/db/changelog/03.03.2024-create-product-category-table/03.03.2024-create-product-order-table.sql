@@ -15,9 +15,9 @@ CREATE TABLE address
     FOREIGN KEY (order_id) REFERENCES "order" -- Correcting the reference table name to "order"
 );
 
-CREATE TABLE product_order
+CREATE TABLE product_set_order
 (
     order_id   uuid REFERENCES "order",
-    product_id uuid REFERENCES product, -- Assuming there's a "product" table
-    PRIMARY KEY (order_id, product_id)
+    product_set_id uuid REFERENCES product_set,
+    PRIMARY KEY (order_id, product_set_id)
 );
