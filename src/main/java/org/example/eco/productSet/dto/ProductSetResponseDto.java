@@ -16,5 +16,4 @@ public class ProductSetResponseDto {
     private UUID id;
     private int quantity;
     private ProductResponseDto product;
-    private Set<OrderResponseDto> orders;
 }

@@ -23,13 +23,9 @@ public class ProductSet {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(mappedBy = "products")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    @JoinTable(
-            name = "product_set_order",
-            joinColumns = @JoinColumn(name = "product_set_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
     private Set<Order> orders;
 }

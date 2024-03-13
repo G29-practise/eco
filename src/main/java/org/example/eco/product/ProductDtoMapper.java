@@ -34,7 +34,11 @@ public class ProductDtoMapper extends GenericMapper<Product, ProductCreateDto, P
             }
             rating = rating / ratings.size();
         }
-        Set<String> categories = product.getCategories().stream().map(Category::getName).collect(Collectors.toSet());
+        Set<String> categories = product
+                .getCategories()
+                .stream()
+                .map(Category::getName)
+                .collect(Collectors.toSet());
 
         ProductResponseDto productResponseDto = mapper.map(product, ProductResponseDto.class);
         productResponseDto.setRating(rating);
