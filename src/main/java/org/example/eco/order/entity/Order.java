@@ -22,9 +22,14 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToMany(mappedBy = "orders")
+    @ManyToMany(fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @JoinTable(
+            name = "product_set_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_set_id")
+    )
     private List<ProductSet> products;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
