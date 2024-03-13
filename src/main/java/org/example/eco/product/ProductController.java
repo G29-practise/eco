@@ -2,6 +2,7 @@ package org.example.eco.product;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.eco.common.App;
 import org.example.eco.product.dto.ProductCreateDto;
 import org.example.eco.product.dto.ProductResponseDto;
 import org.example.eco.product.dto.ProductUpdateDto;
@@ -13,12 +14,19 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.UUID;
+
+import static org.example.eco.product.ProductController.BATH_URL;
+
 @RestController
-@RequestMapping("/product")
+@RequestMapping(App.BASE_PATH + BATH_URL)
 @RequiredArgsConstructor
 public class ProductController {
+
+    public static final String BATH_URL = "/product";
+
     private final ProductService productService;
-    @PostMapping
+
+    @PostMapping("/create")
     public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductCreateDto productCreateDto) throws IOException {
         ProductResponseDto productResponseDto = productService.internalCreate(productCreateDto);
         return ResponseEntity
@@ -26,31 +34,32 @@ public class ProductController {
                 .body(productResponseDto);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<Page<ProductResponseDto>>getAllProduct(@RequestParam(required = false) String predicate, Pageable pageable){
         Page<ProductResponseDto> productResponseDtoPage = productService.getAll(predicate, pageable);
         return ResponseEntity.ok(productResponseDtoPage);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<ProductResponseDto>getProduct(@PathVariable UUID id){
         ProductResponseDto productResponseDto = productService.get(id);
         return ResponseEntity.ok(productResponseDto);
     }
 
-    @GetMapping("/{productTitle}")
+    @GetMapping("/getProductTitle/{productTitle}")
     public ResponseEntity<ProductResponseDto>getProduct(@PathVariable String productTitle){
         ProductResponseDto productResponseDto = productService.getByTitle(productTitle);
         return ResponseEntity.ok(productResponseDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateById/{id}")
     public ResponseEntity<ProductResponseDto>updateProduct(@PathVariable UUID id, @RequestBody ProductUpdateDto productUpdateDto){
         ProductResponseDto productResponseDto = productService.internalUpdate(id, productUpdateDto);
         return ResponseEntity.ok(productResponseDto);
     }
-    @DeleteMapping("/{id}")
-    public void deleteProduct(@PathVariable UUID id){
+    @DeleteMapping("/deleteById/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable UUID id){
         productService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
