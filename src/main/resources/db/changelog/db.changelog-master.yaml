@@ -1,16 +1,16 @@
 databaseChangeLog:
   - include:
-      file: /03.03.2024-create-user-table/03.03.2024-create-user-table.yaml
+      file: /create-user-table/create-user-table.yaml
       relativeToChangelogFile: true
   - include:
-      file: /03.03.2024-create-role-permission-table/03.03.2024-create-role-permission-table.yaml
+      file: /create-role-permission-table/create-role-permission-table.yaml
       relativeToChangelogFile: true
   - include:
-      file: /03.03.2024-create-default-role-and-permissions/03.03.2024-create-default-role-and-permissions.yaml
+      file: /create-default-role-and-permissions/create-default-role-and-permissions.yaml
       relativeToChangelogFile: true
   - include:
-      file: /03.03.2024-create-cart-table/03.03.2024-create-cart-table.yaml
+      file: /create-cart-table/create-cart-table.yaml
       relativeToChangelogFile: true
   - include:
-      file: /03.03.2024-create-product-category-table/03.03.2024-create-product-category-table.yaml
+      file: /create-product-category-table/create-product-category-table.yaml
       relativeToChangelogFile: true

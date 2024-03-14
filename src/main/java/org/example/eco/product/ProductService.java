@@ -11,8 +11,10 @@ import org.example.eco.product.dto.ProductResponseDto;
 import org.example.eco.product.dto.ProductUpdateDto;
 import org.example.eco.product.entity.Product;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -31,13 +33,13 @@ public class ProductService extends GenericService<Product, UUID, ProductCreateD
     protected ProductResponseDto internalCreate(ProductCreateDto productCreateDto) throws IOException {
         Product product = mapper.toEntity(productCreateDto);
 
-//        MultipartFile picture = productCreateDto.getPicture();
-//        String fileName = UUID.randomUUID() + picture.getOriginalFilename();
-//        byte[] bytes = picture.getBytes();
-//        String base64Img = Base64.getEncoder().encodeToString(bytes);
-//        product.setFileName(fileName);
-//        product.setContentType(picture.getContentType());
-//        product.setImg(base64Img);
+        MultipartFile image = productCreateDto.getImage();
+        String fileName = UUID.randomUUID() + image.getOriginalFilename();
+        byte[] bytes = image.getBytes();
+        String base64Img = Base64.getEncoder().encodeToString(bytes);
+        product.setFileName(fileName);
+        product.setContentType(image.getContentType());
+        product.setImg(base64Img);
 
         Set<String> dtoCategoryNames = productCreateDto.getCategories();
         Set<Category> categories = categoryRepository.findAllByNameIn(dtoCategoryNames);

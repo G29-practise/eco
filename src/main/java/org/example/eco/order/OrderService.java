@@ -53,15 +53,15 @@ public class OrderService extends GenericService<Order, UUID, OrderCreateDto, Or
         Address address = new Address(UUID.randomUUID(), city, country, postCode, region, order);
 
         Cart cart = user.getCart();
-        Set<ProductSet> productSets = cart.getProducts();
+        Set<ProductSet> allProductInCart = cart.getProducts();
         List<ProductSet> orderedProducts = new ArrayList<>();
 
-        if (productSets != null) {
+        if (allProductInCart != null) {
             order.setId(UUID.randomUUID());
             order.setUser(user);
             order.setAddress(address);
             address.setOrder(order);
-            for (ProductSet productSet : productSets) {
+            for (ProductSet productSet : allProductInCart) {
                 Optional<Product> optionalProduct = productRepository.findById(productSet.getProduct().getId());
                 if (optionalProduct.isPresent()) {
                     Product product = optionalProduct.get();
@@ -82,8 +82,8 @@ public class OrderService extends GenericService<Order, UUID, OrderCreateDto, Or
 //        cart.getProducts().clear();
         order.setProducts(orderedProducts);
 //        productSetRepository.deleteAllById(s -> orderedProducts.stream().forEach(orderedProducts.get());
-//        cart.setProducts(new HashSet<>());
-        cartRepository.save(cart);
+        cart.setProducts(new HashSet<>());
+//        cartRepository.save(cart);
         Order saved = repository.save(order);
         addressRepository.save(address);
         userRepository.save(user);

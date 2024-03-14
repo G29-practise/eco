@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: create-default-permissions-and-roles
+      id: create-user-table
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: 03.03.2024-create-default-role-and-permissions.sql
+            path: create-user-table.sql
             relativeToChangelogFile: true

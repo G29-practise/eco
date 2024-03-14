@@ -1,6 +1,5 @@
 package org.example.eco.product;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.eco.product.dto.ProductCreateDto;
 import org.example.eco.product.dto.ProductResponseDto;
@@ -19,7 +18,7 @@ import java.util.UUID;
 public class ProductController {
     private final ProductService productService;
     @PostMapping
-    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductCreateDto productCreateDto) throws IOException {
+    public ResponseEntity<ProductResponseDto> createProduct(@ModelAttribute ProductCreateDto productCreateDto) throws IOException {
         ProductResponseDto productResponseDto = productService.internalCreate(productCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

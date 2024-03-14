@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: create-cart-table
+      id: create-default-permissions-and-roles
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: 03.03.2024-create-cart-table.sql
+            path: create-default-role-and-permissions.sql
             relativeToChangelogFile: true

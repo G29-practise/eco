@@ -4,10 +4,8 @@ import org.example.eco.cart.entity.Cart;
 import org.example.eco.common.repository.GenericRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface CartRepository extends GenericRepository<Cart, UUID> {
-    Optional<Cart> findById(UUID id);
 }

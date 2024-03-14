@@ -1,8 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: create-user-table
+      id: create-cart-table
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: 03.03.2024-create-user-table.sql
+            path: create-cart-table.sql
             relativeToChangelogFile: true
