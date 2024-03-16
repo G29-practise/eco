@@ -70,7 +70,8 @@ public class Product {
 //    @EqualsAndHashCode.Exclude
 //    @ToString.Exclude
 //    private Set<Wishlist> wishlists;
-    
+
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)
