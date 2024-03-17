@@ -7,6 +7,7 @@ import org.example.eco.order.entity.Order;
 import org.example.eco.rating.entity.Rating;
 import org.example.eco.user.permission.entity.Permission;
 import org.example.eco.user.role.entity.Role;
+import org.example.eco.wishlist.entity.Wishlist;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -42,6 +43,10 @@ public class User implements UserDetails {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Cart cart;
+    @OneToOne(mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Wishlist wishlist;
 //    private Set<Order> orders;
     private String password;
     private boolean isVerify;
