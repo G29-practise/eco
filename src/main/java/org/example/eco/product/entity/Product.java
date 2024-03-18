@@ -5,6 +5,7 @@ import lombok.*;
 import org.example.eco.product.category.entity.Category;
 import org.example.eco.productSet.entity.ProductSet;
 import org.example.eco.rating.entity.Rating;
+import org.example.eco.wishlist.entity.Wishlist;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -57,11 +58,11 @@ public class Product {
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ProductSet> productSets;
 
-//    @ManyToMany(mappedBy = "products")
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    private Set<Wishlist> wishlists;
-    
+    @ManyToMany(mappedBy = "products")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<Wishlist> wishlists;
+
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @ManyToMany(fetch = FetchType.EAGER)

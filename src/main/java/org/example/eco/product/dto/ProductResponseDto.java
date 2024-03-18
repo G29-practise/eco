@@ -4,22 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.example.eco.wishlist.dto.WishlistResponseDto;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ProductResponseDto extends ProductBaseDto {
+public class ProductResponseDto extends ProductBaseDto{
     private UUID id;
     private int rating;
-//    private Set<WishlistResponseDto> wishlists;
+    private Set<WishlistResponseDto> wishlists;
+    //private Set<OrderResponseDto> orders;
 //    private Set<ProductSetResponseDto> productSets;
-    private String fileName;
-    private String contentType;
     private Set<String> categories;
     private LocalDateTime created;
     private LocalDateTime updated;
