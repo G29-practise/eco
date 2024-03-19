@@ -4,12 +4,12 @@ databaseChangeLog:
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: 03.03.2024-create-role-permission-table.sql
+            path: create-role-permission-table.sql
             relativeToChangelogFile: true
   - changeSet:
       id: create-user-role-user-permission-table
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: 03.03.2024-create-user-role-user-permission-table.sql
+            path: create-user-role-user-permission-table.sql
             relativeToChangelogFile: true

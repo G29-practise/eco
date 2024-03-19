@@ -36,7 +36,7 @@ public class CartService extends GenericService<Cart, UUID, CartCreateDto, CartR
 
         userRepository.save(user);
 
-        Cart saved = repository.save(cart);
+        Cart saved = repository.saveAndFlush(cart);
         return mapper.toResponseDto(saved);
     }
 

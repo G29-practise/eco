@@ -8,9 +8,9 @@ create table product
     discount     int,
     weight       double precision not null,
     price        double precision not null,
---     file_name    varchar          not null,
---     content_type varchar          not null,
---     img          varchar,
+    file_name    varchar          not null,
+    content_type varchar          not null,
+    img          varchar,
     created      timestamp        not null,
     updated      timestamp        not null
 );

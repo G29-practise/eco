@@ -23,17 +23,23 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(nullable = false)
     private String title;
+
     @Column(nullable = false)
     private String description;
+
     @Column(nullable = false)
     private String brand;
+
     @Column(nullable = false)
     private int quantity;
     private int discount;
+
     @Column(nullable = false)
     private double weight;
+
     @Column(nullable = false)
     private double price;
 
@@ -42,25 +48,10 @@ public class Product {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Rating> ratings;
 
-//    private String fileName;
-//    private String contentType;
-//    @Column(length = Integer.MAX_VALUE)
-//    private String img;
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    @JoinTable(
-//            name = "product_order",
-//            joinColumns = @JoinColumn(name = "product_id"),
-//            inverseJoinColumns = @JoinColumn(name = "order_id")
-//    )
-//    private Set<Order> orders;
-
-//    @ManyToMany(mappedBy = "products")
-//    @EqualsAndHashCode.Exclude
-//    @ToString.Exclude
-//    private Set<Cart> carts;
+    private String fileName;
+    private String contentType;
+    @Column(length = Integer.MAX_VALUE)
+    private String img;
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Set;
 
@@ -13,5 +14,5 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class ProductCreateDto extends ProductBaseDto {
     private Set<String> categories;
-//    private MultipartFile picture;
+    private MultipartFile image;
 }
