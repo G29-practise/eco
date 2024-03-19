@@ -50,6 +50,10 @@ public class UserDtoMapper extends GenericMapper<User, UserCreateDto, UserRespon
         return responseDto;
     }
 
+    public UserResponseDto userResponseDto(UserCreateDto createDto){
+       return mapper.map(createDto, UserResponseDto.class);
+    }
+
     @Override
     public void toEntity(UserUpdateDto userUpdateDto, User user) {
         mapper.map(userUpdateDto,user);

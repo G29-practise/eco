@@ -19,7 +19,7 @@ public class JwtService {
 
     public String generateToken(String phoneNumber) {
         Date now = new Date();
-        Date expiration = Date.from(now.toInstant().plusSeconds(this.expiration));
+        Date expiration = Date.from(now.toInstant().plusMillis(this.expiration));
 
         return Jwts.builder()
                 .setSubject(phoneNumber)

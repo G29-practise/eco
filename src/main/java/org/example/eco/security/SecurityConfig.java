@@ -20,6 +20,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final String[] WHITE_LIST = {
+            "/swagger-ui/**",
+            "/api/docs/**",
+            "/user/auth/**",
+            "/email/auth/**"
+    };
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity, JwtAuthorizationFilter authorizationFilter) throws Exception {
         return httpSecurity
@@ -27,8 +35,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         registry -> registry
-                                .requestMatchers("/user/auth/**","/swagger-ui/**",
-                                        "/api/docs/**")
+                                .requestMatchers(WHITE_LIST)
                                 .permitAll()
                                 .anyRequest().authenticated()
                 )

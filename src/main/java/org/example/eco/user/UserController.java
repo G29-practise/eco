@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.UUID;
+
+import static org.example.eco.user.UserController.BATH_USER;
+
 @RestController
-@RequestMapping(App.BASE_PATH + UserController.BATH_USER)
+@RequestMapping(BATH_USER)
 @RequiredArgsConstructor
 public class UserController {
 
@@ -66,7 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/auth/sign-up")
-    public ResponseEntity<UserResponseDto> signUp(
+    public ResponseEntity<?> signUp(
             @RequestBody @Valid UserCreateDto userCreateDto
     ) throws IOException {
         UserResponseDto userResponseDto = userService.create(userCreateDto);

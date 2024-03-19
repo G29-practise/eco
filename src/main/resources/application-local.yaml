@@ -11,6 +11,9 @@ spring:
         auth: true
         starttls:
           enable: true
+  data:
+    redis:
+      url: jdbc:redis://localhost:6000
   datasource:
     username: postgres
     password: postgres
