@@ -79,11 +79,13 @@ public class OrderService extends GenericService<Order, UUID, OrderCreateDto, Or
             }
         }
 
-//        cart.getProducts().clear();
+
         order.setProducts(orderedProducts);
-//        productSetRepository.deleteAllById(s -> orderedProducts.stream().forEach(orderedProducts.get());
+
+        cart.getProducts().clear();
         cart.setProducts(new HashSet<>());
-//        cartRepository.save(cart);
+        cartRepository.save(cart);
+
         Order saved = repository.save(order);
         addressRepository.save(address);
         userRepository.save(user);

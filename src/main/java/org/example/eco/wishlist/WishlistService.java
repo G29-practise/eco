@@ -63,10 +63,6 @@ public class WishlistService extends GenericService<Wishlist, UUID, WishlistCrea
 
         wishlist.setProducts(wishlistProducts);
             Wishlist saved = repository.save(wishlist);
-
-       /* entityManager.flush();
-        entityManager.clear();*/
-
             return mapper.toResponseDto(saved);
         }
 }

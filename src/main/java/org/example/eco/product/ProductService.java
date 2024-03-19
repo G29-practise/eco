@@ -79,14 +79,4 @@ public class ProductService extends GenericService<Product, UUID, ProductCreateD
                         () -> new EntityNotFoundException("Product with name: %s not found".formatted(productTitle)));
         return mapper.toResponseDto(product);
     }
-//    private void setCategories(ProductCreateDto dto, Product product) {
-//        if (Objects.nonNull(dto.getCategories())) {
-//            Set<Category> categorySet = dto.getCategories()
-//                    .stream()
-//                    .map((catName) -> categoryRepository.findByName(catName)
-//                            .orElseThrow(EntityNotFoundException::new)
-//                    ).collect(Collectors.toSet());
-//            product.setCategories(categorySet);
-//        }
-//    }
 }
