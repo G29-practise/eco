@@ -1,5 +1,6 @@
-package org.example.eco.user.dto;
+package org.example.eco.email.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserSignInDto {
+public class EmailRequestDto {
+
+    @NotNull
     private String email;
-    private String password;
 }
