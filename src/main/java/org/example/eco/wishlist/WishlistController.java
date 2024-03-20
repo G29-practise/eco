@@ -47,7 +47,7 @@ public class WishlistController {
     public void deleteWishlist(@PathVariable UUID id){
         wishlistService.delete(id);
     }
-    @PostMapping( ("/{roleId}/add-product/{productId}"))
+    @PostMapping( ("/{wishlistId}/add-product/{productId}"))
     public ResponseEntity<WishlistResponseDto> addProduct(@PathVariable UUID wishlistId,
                                                         @PathVariable UUID productId) {
         WishlistResponseDto wishlistResponseDto = wishlistService.addProduct(wishlistId, productId);

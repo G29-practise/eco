@@ -1,15 +1,15 @@
 databaseChangeLog:
   - changeSet:
-      id: create-product-category-table
+      id: create-product-set-table
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: create-product-category-table.sql
+            path: create-product-set-table.sql
             relativeToChangelogFile: true
   - changeSet:
-      id: create-product-rating-table
+      id: create-order-table
       author: developercruela@gmail.com
       changes:
         - sqlFile:
-            path: create-product-rating-table.sql
+            path: create-order-table.sql
             relativeToChangelogFile: true

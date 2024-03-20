@@ -27,8 +27,8 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/create")
-    public ResponseEntity<ProductResponseDto> createProduct(@RequestBody @Valid ProductCreateDto productCreateDto) throws IOException {
-        ProductResponseDto productResponseDto = productService.internalCreate(productCreateDto);
+    public ResponseEntity<ProductResponseDto> createProduct(@ModelAttribute @Valid ProductCreateDto productCreateDto) throws IOException {
+        ProductResponseDto productResponseDto = productService.create(productCreateDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(productResponseDto);

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.eco.product.dto.ProductResponseDto;
-import org.example.eco.user.entity.User;
+import org.example.eco.user.dto.UserResponseDto;
 
 import java.util.Set;
 import java.util.UUID;
@@ -13,6 +13,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class WishlistResponseDto {
     private UUID id;
-    private User user;
+    private UserResponseDto user;
     private Set<ProductResponseDto> products;
 }
