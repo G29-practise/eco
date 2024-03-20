@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class WishlistDtoMapper extends GenericMapper<Wishlist, WishlistCreateDto, WishlistResponseDto, WishlistUpdateDto> {
-    private ModelMapper mapper;
+    private final ModelMapper mapper;
     @Override
     public Wishlist toEntity(WishlistCreateDto wishlistCreateDto) {
         return mapper.map(wishlistCreateDto,Wishlist.class);

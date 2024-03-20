@@ -22,7 +22,7 @@ import java.util.UUID;
 @EnableJpaAuditing
 @EnableFeignClients
 @RequiredArgsConstructor
-public class EcoApplication implements CommandLineRunner {
+public class EcoApplication {
 
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
@@ -32,30 +32,30 @@ public class EcoApplication implements CommandLineRunner {
     }
 
 
-    @Override
-    public void run(String... args) throws Exception {
-        createAdmin();
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//        createAdmin();
+//    }
 
-    private void createAdmin(){
-        String phoneNumber = "998333272322";
-        String email = "admin@gmail.com";
-        Set< Role > roles = Collections.singleton(roleRepository.findByName("ADMIN").orElseThrow());
-        User user = new User(UUID.randomUUID(),
-                "Admin",
-                "Admin",
-                phoneNumber,
-                email,
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                null,
-                passwordEncoder.encode("admin"),
-                true,
-                roles,
-                Collections.emptySet(), null, null);
-        Optional<User> byEmail = userRepository.findByEmail(email);
-        if (byEmail.isEmpty()){
-            userRepository.save(user);
-        }
-    }
+//    private void createAdmin(){
+//        String phoneNumber = "998333272322";
+//        String email = "admin@gmail.com";
+//        Set< Role > roles = Collections.singleton(roleRepository.findByName("ADMIN").orElseThrow());
+//        User user = new User(UUID.randomUUID(),
+//                "Admin",
+//                "Admin",
+//                phoneNumber,
+//                email,
+//                LocalDateTime.now(),
+//                LocalDateTime.now(),
+//                null,
+//                passwordEncoder.encode("admin"),
+//                true,
+//                roles,
+//                Collections.emptySet(), null, null);
+//        Optional<User> byEmail = userRepository.findByEmail(email);
+//        if (byEmail.isEmpty()){
+//            userRepository.save(user);
+//        }
+//    }
 }

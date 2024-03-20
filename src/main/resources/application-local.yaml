@@ -15,9 +15,9 @@ spring:
     redis:
       url: jdbc:redis://localhost:6000
   datasource:
-    username: postgres
-    password: postgres
-    url: jdbc:postgresql://localhost:2000/postgres
+    username: eco_postgres_user
+    password: jXV6er1545oR01DiG0gxgX0GpnmVgy1k
+    url: postgres://eco_postgres_user:jXV6er1545oR01DiG0gxgX0GpnmVgy1k@dpg-cntbv1vjbltc7399qkm0-a/eco_postgres
   jpa:
     show-sql: true
     properties:
