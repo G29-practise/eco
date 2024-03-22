@@ -17,11 +17,13 @@ public class EmailController {
     public static final String BATH_USER = "/email";
 
     private final EmailService emailService;
+
     @PostMapping("/auth/verification")
     public ResponseEntity<?> getVerification(@RequestBody EmailDto email){
         String verified = emailService.verified(email);
         return ResponseEntity.status(HttpStatus.CREATED).body(verified);
     }
+
 
     @GetMapping("/auth/reTry")
     public ResponseEntity<?> reTryEmailVer(@RequestBody EmailDto emailDto){

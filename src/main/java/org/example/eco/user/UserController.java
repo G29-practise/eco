@@ -49,7 +49,8 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<UserResponseDto> update(@PathVariable UUID id, @RequestBody UserUpdateDto updateDto) {
+    public ResponseEntity<UserResponseDto> update(@PathVariable UUID id,
+                                                  @RequestBody UserUpdateDto updateDto) {
         UserResponseDto responseDto = userService.update(id, updateDto);
         return ResponseEntity.ok(responseDto);
     }
@@ -82,15 +83,17 @@ public class UserController {
     }
 
     @PostMapping("/auth/sign-in")
-    public ResponseEntity<UserResponseDto> singIn(
+    public ResponseEntity<?> singIn(
             @RequestBody @Valid UserSignInDto signInDto
     ) {
         UserResponseDto userResponseDto = userService.signIn(signInDto);
-        String token = jwtService.generateToken(userResponseDto.getPhoneNumber());
+        String token = jwtService.generateToken(userResponseDto.getEmail());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                .body(userResponseDto);
+        return ResponseEntity.status(HttpStatus.OK).body("Bearer " + token);
     }
+
+
+
+
 }
+

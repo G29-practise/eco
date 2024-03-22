@@ -10,5 +10,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCreateDto extends UserBaseDto {
+    private String address;
+
+    private String city;
+
+    private String past_code;
+
+    private String country;
+
+    private String region;
+
     private String password;
+
+    private String conformPassword;
+
 }

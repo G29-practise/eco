@@ -15,11 +15,13 @@ public class RedisConfiguration {
    @Bean
    public JedisConnectionFactory jedisConnectionFactory(){
       JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
-      jedisConnectionFactory.setHostName("localhost");
+      jedisConnectionFactory.setHostName("viaduct.proxy.rlwy.net");
       jedisConnectionFactory.setDatabase(0);
-      jedisConnectionFactory.setPort(6000);
+      jedisConnectionFactory.setPort(57156);
+      jedisConnectionFactory.setPassword("hxxpDTMxhYjdfgbdjDsizaoPLjlLDSag");
        return jedisConnectionFactory;
    }
+
    @Bean
     public RedisTemplate<String , EmailDto> redisTemplate(){
        RedisTemplate<String, EmailDto> template = new RedisTemplate<>();

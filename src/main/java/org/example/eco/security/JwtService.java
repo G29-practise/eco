@@ -17,12 +17,12 @@ public class JwtService {
     @Value("${eco.security.token.secret}")
     private String secret;
 
-    public String generateToken(String phoneNumber) {
+    public String generateToken(String email) {
         Date now = new Date();
         Date expiration = Date.from(now.toInstant().plusMillis(this.expiration));
 
         return Jwts.builder()
-                .setSubject(phoneNumber)
+                .setSubject(email)
                 .setIssuedAt(now)
                 .setExpiration(expiration)
                 .signWith(signingKey())

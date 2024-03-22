@@ -58,6 +58,10 @@ public class UserService extends GenericService<User, UUID, UserCreateDto, UserR
             throw new WrongInputException(INVALID_EMIL);
         }
 
+        if (!user.getPassword().equals(user.getConformPassword())){
+            throw new WrongInputException(INVALID_PASSWORD);
+        }
+
         int code = random.nextInt(1000, 10000);
         notificationService.sendVerifyCode(user.getEmail(), code);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -93,6 +97,7 @@ public class UserService extends GenericService<User, UUID, UserCreateDto, UserR
 
         return mapper.toResponseDto(user);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
