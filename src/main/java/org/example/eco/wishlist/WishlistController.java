@@ -57,4 +57,12 @@ public class WishlistController {
 
     }
 
+    @DeleteMapping(("/{wishlistId}/remove-product/{productId}"))
+    public ResponseEntity<WishlistResponseDto> removeProduct(@PathVariable UUID wishlistId, @PathVariable UUID productId){
+       WishlistResponseDto wishlistResponseDto = wishlistService.removeProduct(wishlistId, productId);
+       return ResponseEntity
+               .status(HttpStatus.NO_CONTENT)
+               .body(wishlistResponseDto);
+    }
+
 }
