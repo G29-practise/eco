@@ -15,8 +15,6 @@ import org.example.eco.wishlist.dto.WishlistUpdateDto;
 import org.example.eco.wishlist.entity.Wishlist;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -31,7 +29,7 @@ public class WishlistService extends GenericService<Wishlist, UUID, WishlistCrea
 
 
     @Override
-    protected WishlistResponseDto internalCreate(WishlistCreateDto wishlistCreateDto){
+    protected WishlistResponseDto internalCreate(WishlistCreateDto wishlistCreateDto) {
         Wishlist wishlist = mapper.toEntity(wishlistCreateDto);
         UUID userId = wishlistCreateDto.getUserId();
         User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
@@ -49,20 +47,28 @@ public class WishlistService extends GenericService<Wishlist, UUID, WishlistCrea
     protected WishlistResponseDto internalUpdate(UUID uuid, WishlistUpdateDto wishlistUpdateDto) {
         Wishlist wishlist = repository.findById(uuid).orElseThrow(
                 () -> new EntityNotFoundException("Wishlist not found"));
-        mapper.toEntity(wishlistUpdateDto,wishlist);
+        mapper.toEntity(wishlistUpdateDto, wishlist);
         Wishlist saved = repository.save(wishlist);
 
         return mapper.toResponseDto(saved);
     }
+
     @Transactional
     public WishlistResponseDto addProduct(UUID wishlistId, UUID productId) {
-        Set<Product>wishlistProducts = new HashSet<>();
         Wishlist wishlist = repository.findById(wishlistId).orElseThrow();
         Product product = productRepository.findById(productId).orElseThrow();
-        wishlistProducts.add(product);
+        wishlist.getProducts().add(product);
 
-        wishlist.setProducts(wishlistProducts);
-            Wishlist saved = repository.save(wishlist);
-            return mapper.toResponseDto(saved);
-        }
+        Wishlist saved = repository.save(wishlist);
+        return mapper.toResponseDto(saved);
+    }
+
+    public WishlistResponseDto removeProduct(UUID wishlistId, UUID productId) {
+        Wishlist wishlist = repository.findById(wishlistId).orElseThrow(() -> new EntityNotFoundException("Wishlist not found"));
+        Product product = productRepository.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        wishlist.getProducts().remove(product);
+
+        Wishlist saved = repository.save(wishlist);
+        return mapper.toResponseDto(saved);
+    }
 }
