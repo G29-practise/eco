@@ -2,7 +2,6 @@ package org.example.eco.user;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.eco.common.App;
 import org.example.eco.common.response.CommonResponse;
 import org.example.eco.security.JwtService;
 import org.example.eco.user.dto.*;
@@ -74,7 +73,7 @@ public class UserController {
             @RequestBody @Valid UserCreateDto userCreateDto
     ) throws IOException {
         UserResponseDto userResponseDto = userService.create(userCreateDto);
-        String token = jwtService.generateToken(userResponseDto.getPhoneNumber());
+        String token = jwtService.generateToken(userResponseDto.getEmail());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -89,7 +88,10 @@ public class UserController {
         UserResponseDto userResponseDto = userService.signIn(signInDto);
         String token = jwtService.generateToken(userResponseDto.getEmail());
 
-        return ResponseEntity.status(HttpStatus.OK).body("Bearer " + token);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .body(userResponseDto);
     }
 
 

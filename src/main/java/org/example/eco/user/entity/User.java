@@ -40,16 +40,6 @@ public class User implements UserDetails {
 
     private String email;
 
-    private String address;
-
-    private String city;
-
-    private String past_code;
-
-    private String country;
-
-    private String region;
-
     @CreatedDate
     private LocalDateTime created;
 
@@ -66,7 +56,6 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Wishlist wishlist;
 
-//    private Set<Order> orders;
     private String password;
 
     private boolean isVerify;

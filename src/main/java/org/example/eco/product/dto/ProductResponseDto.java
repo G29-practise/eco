@@ -1,5 +1,6 @@
 package org.example.eco.product.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,9 @@ public class ProductResponseDto extends ProductBaseDto{
     private Set<WishlistResponseDto> wishlists;
     //private Set<OrderResponseDto> orders;
 //    private Set<ProductSetResponseDto> productSets;
+    private String fileName;
+    private String contentType;
+    @Column(length = Integer.MAX_VALUE)
     private Set<String> categories;
     private LocalDateTime created;
     private LocalDateTime updated;

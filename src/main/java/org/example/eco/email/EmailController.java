@@ -20,14 +20,14 @@ public class EmailController {
 
     @PostMapping("/auth/verification")
     public ResponseEntity<?> getVerification(@RequestBody EmailDto email){
-        String verified = emailService.verified(email);
+        String verified = emailService.verifyEmail(email);
         return ResponseEntity.status(HttpStatus.CREATED).body(verified);
     }
 
 
     @GetMapping("/auth/reTry")
     public ResponseEntity<?> reTryEmailVer(@RequestBody EmailDto emailDto){
-         emailService.retryEmilVer(emailDto);
+         emailService.retry(emailDto);
          return ResponseEntity.status(HttpStatus.OK).build();
     }
 
