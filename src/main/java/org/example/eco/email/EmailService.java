@@ -31,7 +31,7 @@ public class EmailService {
     private final UserDtoMapper userDtoMapper;
     private final RoleRepository roleRepository;
 
-    public String verified(EmailDto emailEntity) {
+    public String verifyEmail(EmailDto emailEntity) {
         EmailDto email = redisTemplate.opsForValue().get(emailEntity.getEmail());
         if (email != null) {
             String checkEmail = email.getUserCreateDto().getEmail();
@@ -55,7 +55,7 @@ public class EmailService {
     }
 
 
-    public void retryEmilVer(EmailDto emailDto) {
+    public void retry(EmailDto emailDto) {
 
     }
 }

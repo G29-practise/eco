@@ -55,11 +55,7 @@ public class UserService extends GenericService<User, UUID, UserCreateDto, UserR
             throw new WrongInputException(INVALID_PHONE_NUMBER);
         }
         if (!validation.isValidEmail(user.getEmail())) {
-            throw new WrongInputException(INVALID_EMIL);
-        }
-
-        if (!user.getPassword().equals(user.getConformPassword())){
-            throw new WrongInputException(INVALID_PASSWORD);
+            throw new WrongInputException(INVALID_EMAIL);
         }
 
         int code = random.nextInt(1000, 10000);

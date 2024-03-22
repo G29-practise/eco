@@ -35,11 +35,11 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         String token = bearer.substring(7);
 
         Claims claims = jwtService.claims(token);
-        String phoneNumber = claims.getSubject();
+        String email = claims.getSubject();
 
         User user = userRepository
-                .findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("User with phone number %s not found", phoneNumber)));
+                .findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("User with phone number %s not found", email)));
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
