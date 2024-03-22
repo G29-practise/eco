@@ -1,28 +1,21 @@
 spring:
   mail:
     host: smtp.gmail.com
+    port: 587
     username: webstore.perfume@gmail.com
     password: lnlzzizbarytqfnz
-    port: 465
-    protocol: smtps
-  properties:
-    mail:
-      smtp:
-        auth: true
-        starttls:
-          enable: true
+    properties:
+      mail.smtp.starttls.enable: true
+      mjaail.smtp.auth: true
+  datasource:
+    username: postgres
+    password: JeISbHpfLuUNIGJKJIobnyMTqiiVVwyf
+    url: jdbc:postgresql://monorail.proxy.rlwy.net:51964/railway
   data:
     redis:
-      url: jdbc:redis://localhost:6000
-  datasource:
-    username: eco_postgres_user
-    password: jXV6er1545oR01DiG0gxgX0GpnmVgy1k
-    url: postgres://eco_postgres_user:jXV6er1545oR01DiG0gxgX0GpnmVgy1k@dpg-cntbv1vjbltc7399qkm0-a/eco_postgres
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+      url: jdbc:redis://viaduct.proxy.rlwy.net:57156/0
+      password: hxxpDTMxhYjdfgbdjDsizaoPLjlLDSag
+      username: default
 eco:
   security:
     token:

@@ -6,6 +6,11 @@ CREATE TABLE "user"
     phone_number VARCHAR   NOT NULL UNIQUE,
     email        VARCHAR UNIQUE,
     password     VARCHAR   NOT NULL,
+    address      VARCHAR,
+    city         VARCHAR,
+    country      VARCHAR,
+    past_code    VARCHAR,
+    region       VARCHAR,
     is_verify    boolean default false,
     created      TIMESTAMP NOT NULL,
     updated      TIMESTAMP NOT NULL

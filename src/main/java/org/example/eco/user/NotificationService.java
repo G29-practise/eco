@@ -12,7 +12,7 @@ import static org.example.eco.common.Variables.*;
 public class NotificationService {
     private final JavaMailSender javaMailSender;
 
-    public void sendVerifyCode(String email,int code) {
+    public void sendVerifyCode(String email, int code) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(FROM_EMAIL);
