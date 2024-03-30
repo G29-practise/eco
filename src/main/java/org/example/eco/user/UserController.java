@@ -2,10 +2,8 @@ package org.example.eco.user;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.eco.common.response.CommonResponse;
 import org.example.eco.security.JwtService;
 import org.example.eco.user.dto.*;
-import org.example.eco.user.otp.OtpService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +24,6 @@ public class UserController {
     public static final String BATH_USER = "/user";
 
     private final UserService userService;
-    private final OtpService otpService;
     private final JwtService jwtService;
 
     @PostMapping("/create")
@@ -58,14 +55,6 @@ public class UserController {
     public ResponseEntity<UserResponseDto> delete(@PathVariable UUID id) {
         userService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @PostMapping("/auth/validate")
-    public ResponseEntity<CommonResponse> validatePhoneNumber(
-            @RequestBody @Valid ValidatePhoneNumberRequestDto requestDto
-    ) {
-        CommonResponse commonResponse = otpService.sendSms(requestDto);
-        return ResponseEntity.ok(commonResponse);
     }
 
     @PostMapping("/auth/sign-up")

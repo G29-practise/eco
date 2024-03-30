@@ -10,13 +10,13 @@ import org.example.eco.product.dto.ProductCreateDto;
 import org.example.eco.product.dto.ProductResponseDto;
 import org.example.eco.product.dto.ProductUpdateDto;
 import org.example.eco.product.entity.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -78,5 +78,15 @@ public class ProductService extends GenericService<Product, UUID, ProductCreateD
                 .orElseThrow(
                         () -> new EntityNotFoundException("Product with name: %s not found".formatted(productTitle)));
         return mapper.toResponseDto(product);
+    }
+
+    public Page<ProductResponseDto> getRecentlyAdded(Pageable pageable) {
+        Page<Product> recentlyAdded = repository.findRecentlyAdded(pageable);
+        return recentlyAdded.map(mapper::toResponseDto);
+    }
+
+    public Page<ProductResponseDto> getTopRated(Pageable pageable) {
+        Page<Product> topRatedProducts = repository.findTopRated(pageable);
+        return topRatedProducts.map(mapper::toResponseDto);
     }
 }

@@ -62,4 +62,16 @@ public class ProductController {
         productService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+
+    @GetMapping("/recently-added")
+    public ResponseEntity<Page<ProductResponseDto>> getRecentlyAdded(Pageable pageable){
+       Page<ProductResponseDto> responseDtos = productService.getRecentlyAdded(pageable);
+       return ResponseEntity.ok(responseDtos);
+    }
+
+    @GetMapping("/top-rated")
+    public ResponseEntity<Page<ProductResponseDto>> getTopRated(Pageable pageable){
+        Page<ProductResponseDto> responseDtos = productService.getTopRated(pageable);
+        return ResponseEntity.ok(responseDtos);
+    }
 }
